@@ -13,9 +13,8 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
+    process.env.MONGODB_URI || 'mongodb://localhost/fitness_tracker',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -23,8 +22,6 @@ mongoose.connect(
       useFindAndModify: false
     }
   );
-
-
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
