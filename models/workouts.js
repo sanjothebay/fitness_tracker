@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const exerciseWorkOutSchema = new Schema({
+const WorkOutSchema = new Schema({
   exercisename: {
     type: String,
     trim: true,
@@ -19,9 +18,21 @@ const exerciseWorkOutSchema = new Schema({
   },
 });
 
-const ExerciseWorkOut = mongoose.model(
-  "ExerciseWorkOut",
-  exerciseWorkOutSchema
+const WorkOut = mongoose.model(
+  "WorkOut",
+  WorkOutSchema
 );
 
-module.exports = ExerciseWorkOut;
+module.exports = WorkOut;
+
+
+// day: new Date().setDate(new Date().getDate()-10),
+// exercises: [
+//   {
+//     type: "resistance",
+//     name: "Bicep Curl",
+//     duration: 20,
+//     weight: 100,
+//     reps: 10,
+//     sets: 4
+//   }
