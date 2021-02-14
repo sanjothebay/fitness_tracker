@@ -10,6 +10,3 @@ const ExcerciseSchema = new Schema({
 const Excercise = mongoose.model("Book", ExcerciseSchema);
 
 module.exports = Excercise;
-
-
-excercise
