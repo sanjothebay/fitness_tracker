@@ -46,15 +46,25 @@ app.get("/stats", function (req, res) {
 
 app.get("/exercise", (req, res) => {
   db.Workout.find({})
-    .then((dbexercise) => {
-      res.json(dbexercise);
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
     })
     .catch((err) => {
       res.json(err);
     });
 });
 
-app.post("/workouts", ({body}, res) => {
+app.get("/workouts", (req, res) => {
+  db.Workout.find({})
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.post("/api/workouts", ({body}, res) => {
   db.Exercise.create(body)
     .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
     .then(dbWorkout => {
@@ -65,8 +75,8 @@ app.post("/workouts", ({body}, res) => {
     });
 });
 
-app.put("/Workout/:id", (req, res) => {
-  db.Workout.updateOne({})
+app.put("/api/workouts/:id", (req, res) => {
+  db.Workout.updateOne({_id: id})
     .then((dbexercise) => {
       res.json(dbexercise);
     })
@@ -74,20 +84,6 @@ app.put("/Workout/:id", (req, res) => {
       res.json(err);
     });
 });
-
-app.post("/submit", ({ body }, res) => {
-  db.Book.create(body)
-    .then(({ _id }) =>
-      db.WorkOut.findOneAndUpdate({}, { $push: { books: _id } }, { new: true })
-    )
-    .then((dbWorkOut) => {
-      res.json(dbWorkOut);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
-
 
 
 app.listen(PORT, () => {
