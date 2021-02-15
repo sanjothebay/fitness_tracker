@@ -1,7 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const path = path("path");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 const db = require("./models");
@@ -23,12 +23,49 @@ mongoose.connect(
     useFindAndModify: false,
   }
 );
-db.WorkOut.create({ name: "Campus Library" })
-  .then((dbWorkOut) => {
-    console.log(dbWorkOut);
-  })
-  .catch(({ message }) => {
-    console.log(message);
+
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "./index.html"));
+  });
+
+  app.get("/exercise", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/exercise.html"));
+  });
+
+  app.get("/stats", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/stats.html"));
+  });
+
+
+  app.get("/exercise", (req, res) => {
+    db.Workout.find({})
+      .then((dbexercise) => {
+        res.json(dbexercise);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.put("/exercise", (req, res) => {
+    db.Workout.find({})
+      .then((dbexercise) => {
+        res.json(dbexercise);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+
+  app.post("/exercise", (req, res) => {
+    db.Workout.find({})
+      .then((dbexercise) => {
+        res.json(dbexercise);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
   });
 
 app.post("/submit", ({ body }, res) => {
