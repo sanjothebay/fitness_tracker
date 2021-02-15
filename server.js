@@ -24,49 +24,56 @@ mongoose.connect(
   }
 );
 
-  app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "./index.html"));
+db.Workout.create({ name: "Workout Library" })
+  .then((dbWorkout) => {
+    console.log(dbWorkout);
+  })
+  .catch(({ message }) => {
+    console.log(message);
   });
 
-  app.get("/exercise", function(req, res) {
-    res.sendFile(path.join(__dirname, "./public/exercise.html"));
-  });
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "./index.html"));
+});
 
-  app.get("/stats", function(req, res) {
-    res.sendFile(path.join(__dirname, "./public/stats.html"));
-  });
+app.get("/exercise", function (req, res) {
+  res.sendFile(path.join(__dirname, "./public/exercise.html"));
+});
 
+app.get("/stats", function (req, res) {
+  res.sendFile(path.join(__dirname, "./public/stats.html"));
+});
 
-  app.get("/exercise", (req, res) => {
-    db.Workout.find({})
-      .then((dbexercise) => {
-        res.json(dbexercise);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
+app.get("/exercise", (req, res) => {
+  db.Workout.find({})
+    .then((dbexercise) => {
+      res.json(dbexercise);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
-  app.put("/exercise", (req, res) => {
-    db.Workout.find({})
-      .then((dbexercise) => {
-        res.json(dbexercise);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
+app.put("/exercise", (req, res) => {
+  db.Workout.find({})
+    .then((dbexercise) => {
+      res.json(dbexercise);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
-
-  app.post("/exercise", (req, res) => {
-    db.Workout.find({})
-      .then((dbexercise) => {
-        res.json(dbexercise);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
+app.post("/submit", ({body}, res) => {
+  db.Exercise.create(body)
+    .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 app.post("/submit", ({ body }, res) => {
   db.Book.create(body)
@@ -81,29 +88,29 @@ app.post("/submit", ({ body }, res) => {
     });
 });
 
-app.get("/books", (req, res) => {
-  db.Book.find({})
-    .then((dbBook) => {
-      res.json(dbBook);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
+// app.get("/books", (req, res) => {
+//   db.Book.find({})
+//     .then((dbBook) => {
+//       res.json(dbBook);
+//     })
+//     .catch((err) => {
+//       res.json(err);
+//     });
+// });
 
-app.get("/WorkOut", (req, res) => {
-  db.WorkOut.find({})
-    .then((dbWorkOut) => {
-      res.json(dbWorkOut);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
+// app.get("/WorkOut", (req, res) => {
+//   db.WorkOut.find({})
+//     .then((dbWorkOut) => {
+//       res.json(dbWorkOut);
+//     })
+//     .catch((err) => {
+//       res.json(err);
+//     });
+// });
 
 app.get("/populated", (req, res) => {
   db.WorkOut.find({})
-    .populate("books")
+    .populate("exercises")
     .then((dbWorkOut) => {
       res.json(dbWorkOut);
     })
