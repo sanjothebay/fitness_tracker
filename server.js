@@ -54,23 +54,23 @@ app.get("/exercise", (req, res) => {
     });
 });
 
-app.put("/exercise", (req, res) => {
-  db.Workout.find({})
-    .then((dbexercise) => {
-      res.json(dbexercise);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
-
-app.post("/submit", ({body}, res) => {
+app.post("/workouts", ({body}, res) => {
   db.Exercise.create(body)
     .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
     .catch(err => {
+      res.json(err);
+    });
+});
+
+app.put("/Workout/:id", (req, res) => {
+  db.Workout.updateOne({})
+    .then((dbexercise) => {
+      res.json(dbexercise);
+    })
+    .catch((err) => {
       res.json(err);
     });
 });
@@ -88,36 +88,7 @@ app.post("/submit", ({ body }, res) => {
     });
 });
 
-// app.get("/books", (req, res) => {
-//   db.Book.find({})
-//     .then((dbBook) => {
-//       res.json(dbBook);
-//     })
-//     .catch((err) => {
-//       res.json(err);
-//     });
-// });
 
-// app.get("/WorkOut", (req, res) => {
-//   db.WorkOut.find({})
-//     .then((dbWorkOut) => {
-//       res.json(dbWorkOut);
-//     })
-//     .catch((err) => {
-//       res.json(err);
-//     });
-// });
-
-app.get("/populated", (req, res) => {
-  db.WorkOut.find({})
-    .populate("exercises")
-    .then((dbWorkOut) => {
-      res.json(dbWorkOut);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
