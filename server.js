@@ -64,7 +64,17 @@ app.get("/workouts", (req, res) => {
     });
 });
 
-app.post("/api/workouts/:id", ({body}, res) => {
+app.get("/api/workouts", (req, res) => {
+  db.Workout.find({})
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.post("/api/workouts", ({body}, res) => {
   db.Exercise.create(body)
     .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
     .then(dbWorkout => {
