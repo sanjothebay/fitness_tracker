@@ -24,14 +24,6 @@ mongoose.connect(
   }
 );
 
-db.Workout.create({ name: "Workout Library" })
-  .then((dbWorkout) => {
-    console.log(dbWorkout);
-  })
-  .catch(({ message }) => {
-    console.log(message);
-  });
-
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "./index.html"));
 });
@@ -95,7 +87,7 @@ app.post("/api/workouts", ({body}, res) => {
 });
 
 app.put("/api/workouts/:id", (req, res) => {
-  db.Workout.findByIdAndUpdate(req.params.id, { $push: {exercises: req.body } }, { new: true })
+  db.Workout.findByIdAndUpdate(req.params.id, { $push: {exercises: req.body } }, { new: true, runValidators: true,})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
