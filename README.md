@@ -16,6 +16,7 @@ https://github.com/sanjothebay/fitness_tracker
 3. [Collections](#Collections)
 4. [Routes](#Routes)
 5. [Submission Video](#Submission_Video)
+6. [LICENSE](#LICENSE)
 
 
 
@@ -74,4 +75,11 @@ This application is deploy with  application with a MongoDB database to Heroku:
   ## Submission Video <a name="Submission_Video"></a>
   
   ![4ymjf2](https://user-images.githubusercontent.com/67298961/108467521-f34d2e00-724a-11eb-8e24-9011a635407a.gif)
- 
+  
+  
+  ### LICENSE
+  
+  ## LICENSE <a name="LICENSE"></a>
+  
+  License under the [MIT License](LICENSE)
+  
