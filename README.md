@@ -1,12 +1,12 @@
 # fitness_tracker
 
-![image](https://user-images.githubusercontent.com/67298961/108020926-1c6b8580-6fe3-11eb-80e1-5866e67a1d09.png)
-
 https://warm-depths-56679.herokuapp.com/
 
 https://sanjothebay.github.io/fitness_tracker/
 
 https://github.com/sanjothebay/fitness_tracker
+
+![image](https://user-images.githubusercontent.com/67298961/108020926-1c6b8580-6fe3-11eb-80e1-5866e67a1d09.png)
 
 # Table of contents
 
