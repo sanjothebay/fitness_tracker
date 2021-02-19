@@ -53,7 +53,7 @@ This application is deploy with  application with a MongoDB database to Heroku:
   * [Deploy with Heroku and MongoDB Atlas](../04-Important/MongoAtlas-Deploy.md)
   
   
-  ### Collections <a name="Collections"></a>
+  ## Collections <a name="Collections"></a>
   ### Collections
   
   ![image](https://user-images.githubusercontent.com/67298961/108455726-5da6a400-7234-11eb-8867-5b37ea3e9f8d.png)
@@ -76,10 +76,8 @@ This application is deploy with  application with a MongoDB database to Heroku:
   
   ![4ymjf2](https://user-images.githubusercontent.com/67298961/108467521-f34d2e00-724a-11eb-8e24-9011a635407a.gif)
   
-  
-  ### LICENSE
-  
   ## LICENSE <a name="LICENSE"></a>
+  ### LICENSE
   
   License under the [MIT License](LICENSE)
   
